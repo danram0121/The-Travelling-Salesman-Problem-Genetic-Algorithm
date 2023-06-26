@@ -1,3 +1,9 @@
+# CAP 4630 Intro to AI
+# Project 2 - The Traveling Salesman Problem (TSP) using Genetic Algorithms (GA)
+# Contributors: John Kantlehner, Daniel Ramirez, and Brandon Rojas
+# Start Date: 06/19/2023
+# End Date: 06/21/2023
+
 import numpy as np, random, operator, pandas as pd, matplotlib.pyplot as plt
 from IPython.display import clear_output
 
