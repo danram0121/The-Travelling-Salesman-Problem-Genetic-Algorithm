@@ -4,8 +4,14 @@
 # Start Date: 06/19/2023
 # End Date: 06/21/2023
 
-import numpy as np, random, operator, pandas as pd, matplotlib.pyplot as plt
+import numpy as np
+import random
+import operator
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from IPython.display import clear_output
+import time
 
 # City class
 class City:
@@ -148,7 +154,6 @@ def nextGeneration(currentGen, eliteSize, mutationRate):
     nextGeneration = mutatePopulation(children, mutationRate)
     return nextGeneration
 
-import matplotlib.animation as animation
 
 def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
     pop = initialPopulation(popSize, population)
