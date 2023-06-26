@@ -1,6 +1,7 @@
 # CAP 4630 Intro to AI
 # Project 2 - The Traveling Salesman Problem (TSP) using Genetic Algorithms (GA)
 # Contributors: John Kantlehner, Daniel Ramirez, and Brandon Rojas
+# Link to Google Colab: https://colab.research.google.com/drive/1Hd4qQay9z5FIJ4WSrW3J-ded7w8K43mG?usp=sharing
 # Start Date: 06/19/2023
 # End Date: 06/21/2023
 
