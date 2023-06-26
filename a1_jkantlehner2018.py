@@ -9,7 +9,6 @@ import random
 import operator
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from IPython.display import clear_output
 import time
 
@@ -158,27 +157,26 @@ def nextGeneration(currentGen, eliteSize, mutationRate):
 def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
     pop = initialPopulation(popSize, population)
     print("Initial distance: " + str(1 / rankRoutes(pop)[0][1]))
-    
-    # Set up the figure and axis for the animation
-    fig, ax = plt.subplots()
-    line, = ax.plot([], [], 'r-')
+    best_distance = 1 / rankRoutes(pop)[0][1]  # Store the best distance
 
-    def animate(i):
-        nonlocal pop  # Allows us to modify pop
+    for i in range(0, generations):
         pop = nextGeneration(pop, eliteSize, mutationRate)
-        bestRouteIndex = rankRoutes(pop)[0][0]
-        bestRoute = pop[bestRouteIndex]
-        x = [city.x for city in bestRoute]
-        y = [city.y for city in bestRoute]
-        line.set_data(x, y)
-        return line,
+        current_best_distance = 1 / rankRoutes(pop)[0][1]
+        if current_best_distance < best_distance:
+            best_distance = current_best_distance  # Update best distance if current is better
+            print(f"New best distance of {best_distance} found at generation {i}")
+        if i % 20 == 0:  # Every 20 generations
+            bestRouteIndex = rankRoutes(pop)[0][0]
+            bestRoute = pop[bestRouteIndex]
+            current_distance = 1 / Fitness(bestRoute).routeFitness()  # Get current generation's distance
+            clear_output(wait=True)
+            print("Generation #: " + str(i))
+            print("Best distance so far: " + str(best_distance))
+            print("Current distance: " + str(current_distance))  # Print current generation's distance
+            plot_route(cityList, bestRoute)
+            time.sleep(1)
 
-    ani = animation.FuncAnimation(fig, animate, frames=generations, interval=200, blit=True)
-
-    plt.scatter([city.x for city in population], [city.y for city in population], color='blue')
-    plt.show()
-    
-    print("Final distance: " + str(1 / rankRoutes(pop)[0][1]))
+    print("Final best distance: " + str(best_distance))
     bestRouteIndex = rankRoutes(pop)[0][0]
     bestRoute = pop[bestRouteIndex]
     return bestRoute
